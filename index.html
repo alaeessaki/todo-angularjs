@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <script src="lib/angular.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/services/todo.service.js"></script>
+    <script src="js/controllers/todo.controller.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body ng-app="todoApp">
+
+    <nav class="navbar navbar-expand navbar-dark bg-success">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <ul class="nav navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container" ng-controller="todoController" ng-init="state='add'; loadData()">
+        <div class="row mb-3">
+            <div class="col-12 mt-5 p-0">
+                <div class="form-group" ng-show="state=='add'">
+                    <label for="add">add Todo :</label>
+                    <input type="text" class="form-control" name="add" id="add" aria-describedby="helpId" placeholder=""
+                        ng-model="title">
+                </div>
+                <div class="form-group" ng-show="state=='update'">
+                    <label for="update">update Todo :</label>
+                    <input type="text" class="form-control" name="update" id="update" aria-describedby="helpId" placeholder=""
+                        ng-model="selectedTodo">
+                </div>
+            </div>
+            <div class="col-12 mt-0 p-0">
+                <button  id="" class="btn btn-success btn-block" ng-show="state=='add'"
+                    ng-click="add(title, id); inc()">Add todo <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                </button>
+                <button  id="" class="btn btn-warning btn-block" ng-show="state=='update'"
+                    ng-click="update(selectedTodo, selectedId); changeState('', 0)">update todo <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="card text-left col-12 mr-0 ml-0" ng-repeat="todo in todos">
+                <div class="card-body d-flex justify-content-between">
+                    <h4 class="card-title mb-0">{{todo.title}}</h4>
+
+                    <div>
+                        <button class="btn btn-secondary"><i class="fa fa-pencil"
+                                aria-hidden="true" ng-click="changeState(todo.title, todo.id);"></i></button>
+                        <button class="btn btn-danger" ng-click="delete(todo.id)"><i
+                                class="fa fa-trash" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
